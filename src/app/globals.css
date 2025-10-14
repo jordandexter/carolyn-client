@@ -14,9 +14,59 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
+}
+
+@keyframes bouncey {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-bounce1 {
+  animation: bouncey 1s infinite ease-in-out;
+  animation-delay: 0s;
+}
+
+.animate-bounce2 {
+  animation: bouncey 1s infinite;
+  animation-delay: 0.3s;
+}
+
+.animate-bounce3 {
+  animation: bouncey 1s infinite;
+  animation-delay: 0.6s;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* Internet Explorer and Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, and Opera */
+}
+
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default
 }
 
 body {
