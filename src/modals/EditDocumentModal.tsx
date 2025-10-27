@@ -19,36 +19,6 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
     const [description, setDescription] = useState<string>("")
     const [submitted, setSubmitted] = useState<boolean>(false)
 
-    const uploadDocuments = async (file: File, backsideFile?: File | null) => {
-        try {
-            setUploading(true)
-            let result = null;
-            if (backsideFile) {
-                result = await uploadDocument({
-                    title: title,
-                    description: description,
-                    createdDate: new Date(),
-                    file: file,
-                    backside_file: backsideFile
-                })
-            } else {
-                result = await uploadDocument({
-                    title: title,
-                    description: description,
-                    createdDate: new Date(),
-                    file: file
-                })
-            }
-            console.log('Upload Result:', result)
-            setSubmitted(true)
-        } catch (error) {
-            console.log("Error uploading file: ", error)
-        }
-
-        reset()
-    }
-
-
     const handleSubmit = async () => {
         if (!doc || !doc.id) return;
 
@@ -56,7 +26,7 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
             id: doc.id,
             document: {
                 id: doc.id,
-                uploadedDate: doc.uploadedDate,
+                uploaded_date: doc.uploaded_date,
                 is_partial: doc.is_partial,
                 filename: doc.filename,
                 title: title,
@@ -74,10 +44,14 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
 
         try {
             const response = await editDocument(payload)
-            if (response.success)
-                console.log('woohoo!')
+            if (response.success) {
+                setSubmitted(true)
+                setTimeout(() => {
+                    onClose?.()
+                }, 3000)
+            }
             else {
-                console.log('boo')
+                setSubmitted(false)
             }
         } catch (error) {
             console.log(error)
@@ -85,24 +59,9 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
         }
     }
 
-
-
-    const reset = () => {
-        setUploading(false)
-        setFrontFile(null);
-        setBacksideFile(null)
-        setTitle('')
-        setDescription('')
-    }
-
     const handleClose = () => {
         if (onClose)
             onClose()
-
-        setTimeout(() => {
-            reset()
-        }, 4000)
-
     }
 
     useEffect(() => {
@@ -127,7 +86,6 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
                 const file = new File([frontFileBlob], documentData.filename)
                 setFrontFile(file)
 
-
                 // Download and set backside file if applicable
                 if (documentData.backside_id) {
                     const backsideResult = await getDocuments({
@@ -144,6 +102,8 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
                     setBacksideFile(backside_file)
                 }
 
+                setTitle(documentData.title || '')
+                setDescription(documentData.description || '')
             } catch (error) {
                 console.log(error)
             }
@@ -162,7 +122,7 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
     }, [doc])
 
     return (
-        <div className="flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2 overflow-hidden border-1 border-purple-500 "
+        <div className="flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2 overflow-hidden border-1 border-primary "
             style={{
                 boxShadow: `0px 20px 25px 0px rgba(0,0,0,0.4)`,
                 maxWidth: '400px',
@@ -184,10 +144,10 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
 
             <div className={`flex flex-col items-center max-h-[400px] p-2 overflow-scroll gap-2 scrollbar-hide bg-gray-200 ${frontFile ? 'border-1 rounded-lg border-gray-400' : ''}`}>
                 <div className={`transition-all w-full duration-1000`}>
-                    <p className="text-purple-500 font-semibold px-2">Frontside</p>
+                    <p className="text-primary font-semibold px-2">Frontside</p>
                     <FileDrop
-                        file={frontFile}
-                        setFiles={setFrontFile} />
+                        file={newFrontFile ? newFrontFile : frontFile}
+                        setFiles={setNewFrontFile} />
                 </div>
 
 
@@ -197,8 +157,8 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
                 </button>
 
                 <div className={`transition-all w-full duration-1000 ${frontFile ? '' : 'pointer-events-none opacity-0 absolute h-0'}`}>
-                    <p className="text-purple-500 font-semibold px-2">Backside <span className="text-gray-400 italic text-sm font-normal">(optional)</span></p>
-                    <FileDrop file={backsideFile} setFiles={setBacksideFile} />
+                    <p className="text-primary font-semibold px-2">Backside <span className="text-gray-400 italic text-sm font-normal">(optional)</span></p>
+                    <FileDrop file={newBacksideFile ? newBacksideFile : backsideFile} setFiles={setNewBacksideFile} />
                 </div>
 
                 {!frontFile &&
@@ -209,24 +169,24 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
             </div>
 
             <>
-                <p className="text-purple-500 text-md px-2 font-bold">
+                <p className="text-primary text-md px-2 font-bold">
                     Title<span className="text-gray-500"> - Give the document a title</span></p>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => { setTitle(e.target.value) }}
-                    className="text-black border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2"
+                    className="text-black border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2"
                     placeholder="Title"
                 />
             </>
 
             <>
-                <p className="text-purple-500 text-md px-2 font-bold">
+                <p className="text-primary text-md px-2 font-bold">
                     Description<span className="text-gray-500"> - Give the document a description</span></p>
                 <textarea
                     value={description}
                     onChange={(e) => { setDescription(e.target.value) }}
-                    className="text-black border-1 text-sm border-gray-300 rounded-[10px] px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2 scrollbar-hide"
+                    className="text-black border-1 text-sm border-gray-300 rounded-[10px] px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2 scrollbar-hide"
                     placeholder="Description"
                 />
             </>
@@ -238,15 +198,15 @@ export function EditDocumentModal({ onClose }: { onClose?: () => void }) {
                     handleSubmit()
                 }}
             >
-
-                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-green-500 ${submitted ? 'translate-y-0' : '-translate-y-85 -translate-x-85'}`}>
+                <div className={`absolute flex z-10 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-green-500 ${submitted ? 'translate-y-0' : '-translate-y-85 -translate-x-85'}`}>
                     <p className="text-white">Submitted successfully!</p>
                 </div>
-                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-purple-500 ${frontFile ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
+                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-primary 
+                    ${newFrontFile || newBacksideFile || title !== doc?.title || description !== doc.description ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
                     Submit Changes
                 </div>
 
-                <p className="text-white">Upload file to begin</p>
+                <p className="text-white">Make some changes first!</p>
 
             </button>
             <button

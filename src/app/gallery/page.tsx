@@ -232,7 +232,7 @@ export default function Gallery() {
                                         ))}
                                     {
                                         !isFetching && filteredDocuments?.length === 0 &&
-                                        <div className="flex text-black w-full justify-center font-bold text-purple-500">No results :/</div>
+                                        <div className="flex text-black w-full justify-center font-bold text-primary">No results :/</div>
                                     }
                                 </div>
                             ) : (

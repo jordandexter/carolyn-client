@@ -1,5 +1,4 @@
 import SearchBar from "@/components/SearchBar";
-import { UploadDocumentButton } from "../UploadDocumentButton";
 import Link from "next/link";
 
 export default function Header() {
@@ -11,14 +10,14 @@ export default function Header() {
             <div className="hidden md:flex flex-row gap-5">
                 <Link
                     href="/"
-                    className="text-purple-500 text-2xl italic font-bold border-r-2 pr-5">
-                    Carolyn
+                    className="text-primary text-2xl italic font-bold h-10">
+                    <img src="/logo.png" alt="logo.png" className="object-fit flex h-11" />
                 </Link>
 
                 <div className="flex gap-5 flex-row justify-center items-center">
                     <Link
                         href={'/gallery'}
-                        className="text-gray-500 hover:text-purple-500 rounded-sm">
+                        className="text-gray-500 hover:text-primary rounded-sm">
                         Gallery
                     </Link>
                 </div>
@@ -26,7 +25,6 @@ export default function Header() {
 
             <div className="flex flex-row justify-end w-full gap-2">
                 <SearchBar />
-                <UploadDocumentButton />
             </div>
 
             <div>

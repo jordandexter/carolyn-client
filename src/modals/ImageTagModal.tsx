@@ -147,7 +147,7 @@ export function ImageTagModal({ onClose }: { onClose: () => void }) {
     if (!imageTagOpen.documentId) return null;
 
     return (
-        <div className={`flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2  border-1 border-purple-500 relative ${personResults.length > 0 ? '' : 'cursor-crosshair'}`}
+        <div className={`flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2  border-1 border-primary relative ${personResults.length > 0 ? '' : 'cursor-crosshair'}`}
             style={{
                 boxShadow: `0px 20px 25px 0px rgba(0,0,0,0.4)`,
                 maxWidth: '800px',
@@ -205,7 +205,7 @@ export function ImageTagModal({ onClose }: { onClose: () => void }) {
                                             setTagType('Name')
                                         }
                                     }}
-                                    className={`flex transition-all duration-200 ${tagInputFocused && !submitting ? 'w-50' : 'w-0'} p-3 bg-white rounded-lg text-black outline-none border-2 h-5 border-white focus:border-purple-500`} />
+                                    className={`flex transition-all duration-200 ${tagInputFocused && !submitting ? 'w-50' : 'w-0'} p-3 bg-white rounded-lg text-black outline-none border-2 h-5 border-white focus:border-primary`} />
 
                                 <div className={`bg-white p-2 rounded-lg ${personResults.length > 0 ? '' : 'hidden'}`}
                                     style={{
@@ -253,7 +253,7 @@ export function ImageTagModal({ onClose }: { onClose: () => void }) {
                 <div className={`absolute flex z-10 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-red-400 ${submittedResult === false ? 'translate-y-0' : '-translate-y-85 translate-x-85'}`}>
                     <p className="text-white">This connection already exists!</p>
                 </div>
-                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-purple-500 ${personId && imageTagOpen.documentId && actualPoint ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
+                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-primary ${personId && imageTagOpen.documentId && actualPoint ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
                     Submit
                 </div>
 

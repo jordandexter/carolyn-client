@@ -24,14 +24,14 @@ export function GalleryHeader({
     return (
         <div className='flex flex-row gap-2 w-full justify-between'>
             <div className='flex flex-row gap-2'>
-                <button className='flex bg-white px-4 border-1 border-white rounded-full justify-center items-center text-gray-500 hover:text-purple-500 hover:border-1 hover:border-purple-500'
+                <button className='flex bg-white px-4 border-1 border-white rounded-full justify-center items-center text-gray-500 hover:text-primary hover:border-1 hover:border-primary'
                     onClick={() => setAddPersonOpen(true)}
                     style={{
                         boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)'
                     }}>
                     Add New Person
                 </button>
-                <button className='flex bg-white px-2 border-1 border-white rounded-full justify-center items-center text-gray-500 hover:text-purple-500 hover:border-1 hover:border-purple-500'
+                <button className='flex bg-white px-4 border-1 border-white rounded-full justify-center items-center text-gray-500 hover:text-primary hover:border-1 hover:border-primary'
                     onClick={() => setUploadDocumentOpen(true)}
                     style={{
                         boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)'
@@ -51,7 +51,7 @@ export function GalleryHeader({
                     }}>
                     Clear
                 </button>
-                <div className='flex transition-all duration-3000 bg-white text-gray-400 hover:text-purple-500 min-h-8 hover:border-1 hover:border-purple-500 rounded-full justify-center items-center hover:scale-102'
+                <div className='flex transition-all duration-3000 bg-white text-gray-400 hover:text-primary min-h-8 hover:border-1 hover:border-primary rounded-full justify-center items-center hover:scale-102'
                     style={{
                         boxShadow: '0px 5px 5px 0px rgba(0,0,0,0.2)'
                     }}>
@@ -77,7 +77,7 @@ export function GalleryHeader({
                     </button>
                 </div>
                 <div
-                    className={`flex rounded-full border px-2 py-1 bg-white gap-4 ${showBorder ? 'border-1 border-purple-500/80' : ''}`}
+                    className={`flex rounded-full border px-2 py-1 bg-white gap-4 ${showBorder ? 'border-1 border-primary/80' : ''}`}
                     onMouseEnter={() => {
                         setShowBorder(true)
                     }}
@@ -100,7 +100,7 @@ export function GalleryHeader({
                         defaultValue="Newest">
                         {sortByOptions.map((opt) => {
                             return (
-                                <option id={opt} key={opt} value={opt} className='flex bg-white hover:text-purple-500 hover:bg-gray-400'>
+                                <option id={opt} key={opt} value={opt} className='flex bg-white hover:text-primary hover:bg-gray-400'>
                                     {opt}
                                 </option>
                             )

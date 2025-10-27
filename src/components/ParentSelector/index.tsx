@@ -55,14 +55,14 @@ export function ParentSelect({ mother, father, setFather, setMother }: { mother:
         <div>
             <div className="flex flex-col w-full bg-purple-200 p-2">
                 <div className="relative flex flex-row">
-                    <button className={`flex w-full justify-center items-center gap-1 py-1 rounded-t-lg ${selectedOption === 'Mother' ? 'bg-white font-bold text-purple-500' : 'bg-gradient-to-t from-gray-500 to-gray-400/90'}`}
+                    <button className={`flex w-full justify-center items-center gap-1 py-1 rounded-t-lg ${selectedOption === 'Mother' ? 'bg-white font-bold text-primary' : 'bg-gradient-to-t from-gray-500 to-gray-400/90'}`}
                         onClick={() => setSelectedOption('Mother')}>
                         Mother
                         <div className={`flex justify-center items-center h-4 w-4 rounded-full bg-green-200 p-1 ${selectedOption === 'Mother' ? '' : 'opacity-50'} ${mother ? '' : 'hidden'}`}>
                             <Check className="text-green-700 h-3 w-3" />
                         </div>
                     </button>
-                    <button className={`flex w-full justify-center items-center gap-1 py-1 rounded-t-lg ${selectedOption === 'Father' ? 'bg-white text-purple-500 font-bold' : 'bg-gradient-to-t from-gray-500 to-gray-400/90'}`}
+                    <button className={`flex w-full justify-center items-center gap-1 py-1 rounded-t-lg ${selectedOption === 'Father' ? 'bg-white text-primary font-bold' : 'bg-gradient-to-t from-gray-500 to-gray-400/90'}`}
                         onClick={() => { setSelectedOption('Father') }}>
                         Father
                         <div className={`flex justify-center items-center h-4 w-4 rounded-full bg-green-200 p-1 ${selectedOption === 'Father' ? '' : 'opacity-50'} ${father ? '' : 'hidden'}`}>
@@ -96,7 +96,7 @@ export function ParentSelect({ mother, father, setFather, setMother }: { mother:
 
                     {mother && selectedOption === 'Mother' &&
                         < div className="flex w-full justify-between items-center bg-purple-200 p-2 rounded-lg">
-                            <p className="text-purple-500 font-bold">{mother.firstname} {mother.lastname}</p>
+                            <p className="text-primary font-bold">{mother.firstname} {mother.lastname}</p>
                             <div className="flex justify-center items-center p-1 hover:bg-red-400/20 rounded-full hover:cursor-pointer"
                                 onClick={() => { setMother(null) }}>
                                 <X className="w-4 h-4 text-red-400" />
@@ -105,7 +105,7 @@ export function ParentSelect({ mother, father, setFather, setMother }: { mother:
                     }
                     {father && selectedOption === 'Father' &&
                         < div className="flex w-full justify-between items-center bg-purple-200 p-2 rounded-lg">
-                            <p className="text-purple-500 font-bold">{father.firstname} {father.lastname}</p>
+                            <p className="text-primary font-bold">{father.firstname} {father.lastname}</p>
                             <div className="flex justify-center items-center p-1 hover:bg-red-400/20 rounded-full hover:cursor-pointer"
                                 onClick={() => { setFather(null) }}>
                                 <X className="w-4 h-4 text-red-400" />

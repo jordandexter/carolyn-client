@@ -33,7 +33,7 @@ export function Tag({ tag, x, y }: { tag: ConnectionModel, x: number, y: number 
     return (
         <div
             key={`${tag.document_id + tag.persons_id}`}
-            className={`absolute h-3 w-3 ${showDetails || lockDetails ? 'bg-purple-500' : 'bg-white'} border-2 border-purple-500 z-10 rounded-full hover:cursor-pointer relative`}
+            className={`absolute h-3 w-3 ${showDetails || lockDetails ? 'bg-primary' : 'bg-white'} border-2 border-primary z-10 rounded-full hover:cursor-pointer relative`}
             style={{
                 boxShadow: '0 5px 10px 0 rgba(0,0,0,0.8)',
                 left: `${x}px`,
@@ -48,7 +48,7 @@ export function Tag({ tag, x, y }: { tag: ConnectionModel, x: number, y: number 
                 setShowDetails(false)
             }}
         >
-            <div className={` ${showDetails || lockDetails ? '' : 'hidden'} absolute translate-x-4 -translate-y-6 flex flex-row bg-white border-purple-500 border-2 flex text-black rounded-lg whitespace-nowrap opacity-80`}
+            <div className={` ${showDetails || lockDetails ? '' : 'hidden'} absolute translate-x-4 -translate-y-6 flex flex-row bg-white border-primary border-2 flex text-black rounded-lg whitespace-nowrap opacity-80`}
                 style={{
                     boxShadow: '0 5px 10px 0 rgba(0,0,0,0.8)',
                 }}>

@@ -30,13 +30,13 @@ export function FileDrop({
     };
 
     return (
-        <div className={`flex flex-col w-full justify-center items-center border-2 border-dashed h-30 rounded-lg border-purple-500 p-2 min-h-[120px]`}
+        <div className={`flex flex-col w-full justify-center items-center border-2 border-dashed h-30 rounded-lg border-primary p-2 min-h-[120px]`}
             onClick={() => {
                 if (fileDropRef && fileDropRef.current) {
                     fileDropRef?.current.click()
                 }
             }}>
-            <div className={`flex w-full h-full rounded-lg justify-center items-center flex-col transition-all duration-200  ease-in-out hover:bg-purple-500/20 hover:cursor-pointer ${isDragging ? 'bg-gradient-to-r from-purple-500/80 to-pink-500/80 -translate-y-0.5 shadow-sm' : 'bg-gradient-to-r from-purple-500/50 to-pink-500/50'}`}
+            <div className={`flex w-full h-full rounded-lg justify-center items-center flex-col transition-all duration-200  ease-in-out hover:bg-primary/20 hover:cursor-pointer ${isDragging ? 'bg-gradient-to-r from-primary/80 to-pink-500/80 -translate-y-0.5 shadow-sm' : 'bg-gradient-to-r from-primary/50 to-pink-500/50'}`}
                 onDragEnter={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
@@ -61,18 +61,18 @@ export function FileDrop({
                 {
                     file ? (
                         <div className="flex gap-2 flex-col justify-center items-center h-full w-full">
-                            <UploadIcon className="text-purple-500" />
+                            <UploadIcon className="text-primary" />
                             <p className="text-white text-sm px-2 py-1 bg-black/30 rounded-full ">{file.name}</p>
                         </div>
                     ) : (
                         <>
                             <p className="text-purple-700 font-semibold pointer-events-none">Drag and Drop</p>
                             <p className="text-gray-100 text-sm pointer-events-none">Maximum size: 100 MB </p>
-                            <p className="text-gray-100 text-xs pointer-events-none">(see supported filetypes here)</p>
+                            <p className="text-gray-100 text-xs pointer-events-none">(.jpg .png .mp3 .mp4)</p>
                         </>
                     )
                 }
-                <input type="file" ref={fileDropRef} className="hidden" multiple={false}
+                <input type="file" ref={fileDropRef} accept=".jpg,.png,.mp4,mp3" className="hidden" multiple={false}
                     onChange={(e) => {
                         handleFileSelect(e)
                     }} />

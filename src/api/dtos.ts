@@ -17,7 +17,7 @@ export interface DocumentModel {
     filename: string,
     description?: string,
     createdDate?: Date,
-    uploadedDate: Date,
+    uploaded_date: Date,
     is_partial: boolean
     blob?: Blob,
     backside_blob?: Blob

@@ -71,7 +71,7 @@ export function AddPersonModal({ onClose }: { onClose: () => void }) {
     }, [submitted])
 
     return (
-        <div className="flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2 overflow-hidden border-1 border-purple-500 "
+        <div className="flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2 overflow-hidden border-1 border-primary "
             style={{
                 boxShadow: `0px 20px 25px 0px rgba(0,0,0,0.4)`,
                 maxWidth: '400px',
@@ -98,31 +98,29 @@ export function AddPersonModal({ onClose }: { onClose: () => void }) {
                 <span className="font-bold">Note:</span> These fields can be changed or updated at anytime.
             </p>
 
-            <div className="flex flex-col py-4 px-2 max-h-[300px] overflow-scroll rounded-lg bg-purple-200 scrollbar-hide relative">
-                <div className="absolute  z-999 w-full top-0 h-10 left-0 bg-gradient-to-b from-black/20 to-black/0"></div>
-
+            <div className="flex flex-col py-4 px-2 max-h-[300px] overflow-scroll rounded-lg bg-purple-200 border-1 border-primary relative">
                 <>
-                    <p className="text-purple-500 text-md px-2 font-bold">
+                    <p className="text-primary text-md px-2 font-bold">
                         First name<span className="text-red-400">*</span><span className="text-gray-500"> - What is their first name?</span></p>
                     <input
                         type="text"
                         value={firstname}
                         spellCheck={false}
                         onChange={(e) => { setFirstName(e.target.value) }}
-                        className="text-black bg-white border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2"
+                        className="text-black bg-white border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2"
                         placeholder="Enter first name"
                     />
                 </>
 
                 <>
-                    <p className="text-purple-500 text-md px-2 font-bold">
+                    <p className="text-primary text-md px-2 font-bold">
                         Last name<span className="text-red-400">*</span><span className="text-gray-500"> - What is their last name?</span></p>
                     <input
                         type="text"
                         value={lastname}
                         spellCheck={false}
                         onChange={(e) => { setLastName(e.target.value) }}
-                        className="text-black bg-white border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2"
+                        className="text-black bg-white border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2"
                         placeholder="Enter last name"
                     />
                 </>
@@ -130,7 +128,7 @@ export function AddPersonModal({ onClose }: { onClose: () => void }) {
                 <ParentSelect mother={mother} father={father} setMother={setMother} setFather={setFather} />
 
                 <>
-                    <p className="text-purple-500 text-md px-2 font-bold">
+                    <p className="text-primary text-md px-2 font-bold">
                         Date of birth<span className="text-gray-500"> - When is their birthday?</span></p>
                     <p className="text-gray-500 text-xs px-2">
                         Optional
@@ -139,12 +137,12 @@ export function AddPersonModal({ onClose }: { onClose: () => void }) {
                         type="date"
                         value={String(dob)}
                         onChange={(e) => { setDob(new Date(e.target.value)) }}
-                        className="text-black bg-white w-full border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2"
+                        className="text-black bg-white w-full border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2"
                         placeholder="Enter first name"
                     />
                 </>
                 <>
-                    <p className="text-purple-500 text-md px-2 font-bold">
+                    <p className="text-primary text-md px-2 font-bold">
                         Date of death <span className="text-gray-500"> - When did they pass?</span>
                     </p>
                     <p className="text-gray-500 text-xs px-2">
@@ -154,7 +152,7 @@ export function AddPersonModal({ onClose }: { onClose: () => void }) {
                         type="date"
                         value={String(dod)}
                         onChange={(e) => { setDod(new Date(e.target.value)) }}
-                        className="text-black bg-white w-full border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2"
+                        className="text-black bg-white w-full border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2"
                         placeholder="Enter first name"
                     />
                 </>
@@ -171,7 +169,7 @@ export function AddPersonModal({ onClose }: { onClose: () => void }) {
                 <div className={`absolute flex z-10 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-green-500 ${submitted ? 'translate-y-0' : '-translate-y-85 -translate-x-85'}`}>
                     <p className="text-white">Submitted successfully!</p>
                 </div>
-                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-purple-500 ${firstname && lastname ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
+                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-primary ${firstname && lastname ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
                     Add Person
                 </div>
 

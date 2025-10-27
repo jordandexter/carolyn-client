@@ -67,10 +67,26 @@ export const uploadDocument =
 export const editDocument =
     async (payload: EditDocumentRequestPayload): Promise<EditDocumentResponsePayload> => {
         const docId = payload.document.id;
+        const { file, backside_file, id, ...data } = payload
+
         if (docId === null)
             throw new Error('Doc id cannot be null')
 
-        return await api_post(`/documents/${docId}`, payload, true)
+        const formData = new FormData()
+
+
+        if (payload.file)
+            formData.append("file", payload.file);
+        if (payload.backside_file)
+            formData.append("backside_file", payload.backside_file)
+        formData.append('document', JSON.stringify(data.document))
+
+        const formattedPayload = {
+            data: undefined,
+            formData: formData
+        }
+
+        return await api_post(`/documents/${docId}`, formattedPayload, true)
     }
 
 export const getDocuments =

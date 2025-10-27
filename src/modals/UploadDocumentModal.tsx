@@ -1,5 +1,5 @@
 import { UploadDocumentRequestPayload } from "@/api/dtos";
-import { PlusCircleIcon, UploadIcon, XIcon } from "lucide-react";
+import { Loader2, PlusCircleIcon, UploadIcon, XIcon } from "lucide-react";
 import { use, useEffect, useRef, useState } from "react";
 import { uploadDocument } from "@/api/client_api";
 import { FileDrop } from "@/components/FileDrop";
@@ -73,7 +73,7 @@ export function UploadDocumentModal({ onClose }: { onClose?: () => void }) {
     }, [submitted])
 
     return (
-        <div className="flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2 overflow-hidden border-1 border-purple-500 "
+        <div className="flex flex-col bg-white transition-all duration-1000 ease-in-out rounded-lg relative pt-9 pb-3 px-4 gap-2 overflow-hidden border-1 border-primary "
             style={{
                 boxShadow: `0px 20px 25px 0px rgba(0,0,0,0.4)`,
                 maxWidth: '400px',
@@ -95,7 +95,7 @@ export function UploadDocumentModal({ onClose }: { onClose?: () => void }) {
 
             <div className={`flex flex-col items-center max-h-[400px] p-2 overflow-scroll gap-2 scrollbar-hide bg-gray-200 ${frontFile ? 'border-1 rounded-lg border-gray-400' : ''}`}>
                 <div className={`transition-all w-full duration-1000`}>
-                    <p className="text-purple-500 font-semibold px-2">Frontside</p>
+                    <p className="text-primary font-semibold px-2">Frontside</p>
                     <FileDrop
                         file={frontFile}
                         setFiles={setFrontFile} />
@@ -109,7 +109,7 @@ export function UploadDocumentModal({ onClose }: { onClose?: () => void }) {
                 </button>
 
                 <div className={`transition-all w-full duration-1000 ${frontFile ? '' : 'pointer-events-none opacity-0 absolute h-0'}`}>
-                    <p className="text-purple-500 font-semibold px-2">Backside <span className="text-gray-400 italic text-sm font-normal">(optional)</span></p>
+                    <p className="text-primary font-semibold px-2">Backside <span className="text-gray-400 italic text-sm font-normal">(optional)</span></p>
                     <FileDrop file={backsideFile} setFiles={setBacksideFile} />
                 </div>
 
@@ -121,30 +121,30 @@ export function UploadDocumentModal({ onClose }: { onClose?: () => void }) {
             </div>
 
             <>
-                <p className="text-purple-500 text-md px-2 font-bold">
+                <p className="text-primary text-md px-2 font-bold">
                     Title<span className="text-gray-500"> - Give the document a title</span></p>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => { setTitle(e.target.value) }}
-                    className="text-black border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2"
+                    className="text-black border-1 text-sm border-gray-300 rounded-full px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2"
                     placeholder="Title"
                 />
             </>
 
             <>
-                <p className="text-purple-500 text-md px-2 font-bold">
+                <p className="text-primary text-md px-2 font-bold">
                     Description<span className="text-gray-500"> - Give the document a description</span></p>
                 <textarea
                     value={description}
                     onChange={(e) => { setDescription(e.target.value) }}
-                    className="text-black border-1 text-sm border-gray-300 rounded-[10px] px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-purple-500 focus:border-2 scrollbar-hide"
+                    className="text-black border-1 text-sm border-gray-300 rounded-[10px] px-2 py-1 focus:outline-none border-2 border-gray-200 focus:ring-0 focus:border-primary focus:border-2 scrollbar-hide"
                     placeholder="Description"
                 />
             </>
 
             <button
-                className={`flex w-full justify-center items-center ${!frontFile || !uploading || submitted ? 'hover:-translate-y-[2px]' : ''} transition-all relative duration-300 ease-in-out bg-gray-400 rounded-full min-h-10 overflow-hidden`}
+                className={`flex w-full justify-center items-center ${frontFile || submitted ? 'hover:-translate-y-[2px]' : ''} transition-all relative duration-300 ease-in-out bg-gray-400 rounded-full min-h-10 overflow-hidden`}
                 disabled={!frontFile || uploading || submitted}
                 onClick={() => {
                     if (frontFile)
@@ -155,7 +155,10 @@ export function UploadDocumentModal({ onClose }: { onClose?: () => void }) {
                 <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-green-500 ${submitted ? 'translate-y-0' : '-translate-y-85 -translate-x-85'}`}>
                     <p className="text-white">Submitted successfully!</p>
                 </div>
-                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-purple-500 ${frontFile ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
+                <div className={`absolute flex z-9 h-[500px] transition-all duration-2000 justify-center items-center w-[500px] rounded-full bg-primary ${frontFile ? 'translate-y-0' : 'translate-y-85 translate-x-85'}`}>
+                    {uploading &&
+                        <Loader2 className="animate-spin h-4 w-4" />
+                    }
                     Upload
                 </div>
 
